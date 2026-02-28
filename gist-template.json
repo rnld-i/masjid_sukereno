@@ -1,0 +1,82 @@
+{
+  "_petunjuk": "File ini adalah konten dinamis untuk website Masjid Al-Ikhlas Sukoreno. Upload ke GitHub Gist sebagai file bernama 'konten.json', lalu salin RAW URL-nya ke dalam script.js (variabel GIST_URL).",
+
+  "pengumuman": [
+    {
+      "badge": "penting",
+      "label": "Penting",
+      "icon": "🔧",
+      "judul": "Renovasi Lantai 2 Masjid",
+      "isi": "Renovasi lantai dua masjid akan dimulai pada awal bulan depan. Jamaah tetap dapat beribadah di lantai dasar. Mohon doa dan dukungannya.",
+      "tanggal": "28 Februari 2026"
+    },
+    {
+      "badge": "kegiatan",
+      "label": "Kegiatan",
+      "icon": "📝",
+      "judul": "Pendaftaran TPA Gelombang Baru",
+      "isi": "Dibuka pendaftaran peserta TPA baru untuk periode Maret 2026. Usia 5–15 tahun. Daftar langsung ke pengurus masjid.",
+      "tanggal": "25 Februari 2026"
+    },
+    {
+      "badge": "info",
+      "label": "Info",
+      "icon": "📅",
+      "judul": "Jadwal Imam & Khatib Bulan Maret",
+      "isi": "Jadwal imam sholat Jumat dan khatib untuk bulan Maret 2026 telah tersedia. Silakan hubungi pengurus untuk informasi lengkap.",
+      "tanggal": "20 Februari 2026"
+    },
+    {
+      "badge": "umum",
+      "label": "Umum",
+      "icon": "🌿",
+      "judul": "Pengumpulan Zakat Fitrah 2026",
+      "isi": "Panitia zakat fitrah telah dibentuk. Penyaluran zakat dilakukan H-2 Idul Fitri. Bagi yang ingin menjadi muzakki, hubungi panitia.",
+      "tanggal": "15 Februari 2026"
+    },
+    {
+      "badge": "kegiatan",
+      "label": "Kegiatan",
+      "icon": "🏆",
+      "judul": "Lomba Hafalan Quran Anak",
+      "isi": "Lomba hafalan quran kategori usia 7–12 tahun. Pendaftaran segera ke sekretariat masjid!",
+      "tanggal": "10 Februari 2026"
+    },
+    {
+      "badge": "info",
+      "label": "Info",
+      "icon": "🎁",
+      "judul": "Donasi Alat Ibadah Diterima",
+      "isi": "Masjid menerima donasi berupa sajadah, mukena, sarung, dan perlengkapan ibadah lainnya dalam kondisi layak pakai.",
+      "tanggal": "5 Februari 2026"
+    }
+  ],
+
+  "galeri": [
+    {
+      "label": "Masjid Al-Ikhlas",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mosque_icon.png/320px-Mosque_icon.png",
+      "wide": true
+    },
+    {
+      "label": "Sholat Tarawih",
+      "url": "https://link-foto-anda-2.jpg"
+    },
+    {
+      "label": "Pengajian Rutin",
+      "url": "https://link-foto-anda-3.jpg"
+    },
+    {
+      "label": "Santri TPA",
+      "url": "https://link-foto-anda-4.jpg"
+    },
+    {
+      "label": "Buka Bersama",
+      "url": "https://link-foto-anda-5.jpg"
+    },
+    {
+      "label": "Maulid Nabi",
+      "url": "https://link-foto-anda-6.jpg"
+    }
+  ]
+}
