@@ -106,13 +106,15 @@ const pengumumanData = [
 ];
 
 // ===== DATA GALERI =====
+// Untuk menambah foto nyata, isi field "foto" dengan path file:
+// Contoh: foto: "assets/images/masjid.jpg"
 const galeriData = [
-  { emoji: "🕌", label: "Masjid Al-Ikhlas", bg: "linear-gradient(135deg, #0f4a31, #1a6b47)" },
-  { emoji: "🌙", label: "Sholat Tarawih", bg: "linear-gradient(135deg, #1e3a5f, #2563eb)" },
-  { emoji: "📖", label: "Pengajian Rutin", bg: "linear-gradient(135deg, #4a1942, #7c3aed)" },
-  { emoji: "🎓", label: "Santri TPA", bg: "linear-gradient(135deg, #7c2d12, #c9973a)" },
-  { emoji: "🤲", label: "Buka Bersama", bg: "linear-gradient(135deg, #064e3b, #10b981)" },
-  { emoji: "⭐", label: "Maulid Nabi", bg: "linear-gradient(135deg, #1a1a2e, #6a5acd)" }
+  { emoji: "🕌", label: "Masjid Al-Ikhlas", bg: "linear-gradient(135deg, #0f4a31, #1a6b47)", foto: "assets/images/masjid.jpg" },
+  { emoji: "🌙", label: "Sholat Tarawih", bg: "linear-gradient(135deg, #1e3a5f, #2563eb)", foto: "assets/images/kegiatan1.jpg" },
+  { emoji: "📖", label: "Pengajian Rutin", bg: "linear-gradient(135deg, #4a1942, #7c3aed)", foto: "assets/images/kegiatan2.jpg" },
+  { emoji: "🎓", label: "Santri TPA", bg: "linear-gradient(135deg, #7c2d12, #c9973a)", foto: "assets/images/kegiatan3.jpg" },
+  { emoji: "🤲", label: "Buka Bersama", bg: "linear-gradient(135deg, #064e3b, #10b981)", foto: "assets/images/kegiatan4.jpg" },
+  { emoji: "⭐", label: "Maulid Nabi", bg: "linear-gradient(135deg, #1a1a2e, #6a5acd)", foto: "assets/images/kegiatan5.jpg" }
 ];
 
 // ===== INIT FUNCTIONS =====
@@ -249,17 +251,43 @@ function initGaleri() {
   const container = document.getElementById('galeriGrid');
   if (!container) return;
 
-  container.innerHTML = galeriData.map((item, i) => `
-    <div class="galeri-item" style="background: ${item.bg}">
-      <div class="galeri-placeholder">
-        <span style="font-size:${i === 0 ? '60px' : '40px'}">${item.emoji}</span>
-        <span>${item.label}</span>
-      </div>
-      <div class="galeri-overlay">
-        <span>📷 ${item.label}</span>
-      </div>
-    </div>
-  `).join('');
+  container.innerHTML = galeriData.map((item, i) => {
+    const fontSize = i === 0 ? '60px' : '40px';
+    if (item.foto) {
+      // Ada path foto — tampilkan gambar, fallback ke emoji jika gagal load
+      return `
+        <div class="galeri-item" style="background: ${item.bg}; padding: 0; position: relative;">
+          <img
+            src="${item.foto}"
+            alt="${item.label}"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover; display:block; border-radius: inherit;"
+            onerror="this.style.display='none'; this.parentElement.querySelector('.galeri-placeholder').style.display='flex';"
+          />
+          <div class="galeri-placeholder" style="display:none; position:absolute; inset:0;">
+            <span style="font-size:${fontSize}">${item.emoji}</span>
+            <span>${item.label}</span>
+          </div>
+          <div class="galeri-overlay">
+            <span>📷 ${item.label}</span>
+          </div>
+        </div>
+      `;
+    } else {
+      // Belum ada foto — tampilkan placeholder emoji
+      return `
+        <div class="galeri-item" style="background: ${item.bg}">
+          <div class="galeri-placeholder">
+            <span style="font-size:${fontSize}">${item.emoji}</span>
+            <span>${item.label}</span>
+          </div>
+          <div class="galeri-overlay">
+            <span>📷 ${item.label}</span>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
 }
 
 function initScrollTop() {
@@ -279,19 +307,53 @@ function initScrollTop() {
   });
 }
 
+function copyToClipboard(text) {
+  // Cara 1: Clipboard API modern (butuh HTTPS)
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  // Cara 2: Fallback pakai execCommand (works di semua browser/HTTP)
+  return new Promise((resolve, reject) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.cssText = 'position:fixed; top:-9999px; left:-9999px; opacity:0;';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      resolve();
+    } catch (err) {
+      document.body.removeChild(textarea);
+      reject(err);
+    }
+  });
+}
+
 function initCopyRekening() {
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const noRek = btn.dataset.rek;
-      navigator.clipboard.writeText(noRek).then(() => {
-        const original = btn.textContent;
-        btn.textContent = '✓ Disalin!';
-        btn.style.background = '#10b981';
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.style.background = '';
-        }, 2000);
-      });
+      const original = btn.textContent;
+
+      copyToClipboard(noRek)
+        .then(() => {
+          btn.textContent = '✓ Tersalin!';
+          btn.style.background = '#10b981';
+          btn.style.transform = 'scale(1.05)';
+        })
+        .catch(() => {
+          // Jika semua cara gagal, tampilkan nomor di prompt
+          prompt('Salin nomor rekening ini:', noRek);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.style.background = '';
+            btn.style.transform = '';
+          }, 2000);
+        });
     });
   });
 }
