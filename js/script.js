@@ -1,3 +1,7 @@
+// ============================================================
+// MASJID AL-IKHLAS SUKORENO — script.js
+// ============================================================
+
 // ===== DATA JADWAL SHOLAT =====
 const jadwalSholat = {
   subuh:   "04:22",
@@ -13,43 +17,37 @@ const kegiatanData = [
     icon: "📖",
     nama: "Pengajian Rutin",
     deskripsi: "Kajian kitab kuning dan tafsir Al-Quran bersama ustadz dan masyarakat sekitar desa.",
-    jadwal: "Setiap Kamis, 20:00",
-    warna: "#1a6b47"
+    jadwal: "Setiap Kamis, 20:00"
   },
   {
     icon: "🎓",
     nama: "TPA (Taman Pendidikan Al-Quran)",
     deskripsi: "Belajar membaca Al-Quran dan dasar-dasar Islam untuk anak-anak usia 5–15 tahun.",
-    jadwal: "Senin–Jumat, 16:00",
-    warna: "#c9973a"
+    jadwal: "Senin–Jumat, 16:00"
   },
   {
     icon: "🧹",
     nama: "Jumat Bersih",
     deskripsi: "Gotong royong membersihkan masjid dan lingkungan sekitar bersama warga desa.",
-    jadwal: "Setiap Jumat, 08:00",
-    warna: "#2563eb"
+    jadwal: "Setiap Jumat, 08:00"
   },
   {
     icon: "🌙",
     nama: "Kegiatan Ramadhan",
     deskripsi: "Tarawih berjamaah, buka bersama, tadarus Al-Quran, dan i'tikaf di 10 malam terakhir.",
-    jadwal: "Selama Bulan Ramadhan",
-    warna: "#7c3aed"
+    jadwal: "Selama Bulan Ramadhan"
   },
   {
     icon: "🤲",
     nama: "Pengajian Ibu-Ibu",
     deskripsi: "Majelis taklim khusus ibu-ibu dengan materi fikih wanita, tausiyah, dan keterampilan islami.",
-    jadwal: "Setiap Ahad, 09:00",
-    warna: "#db2777"
+    jadwal: "Setiap Ahad, 09:00"
   },
   {
     icon: "⭐",
     nama: "Hari Besar Islam",
     deskripsi: "Peringatan Maulid Nabi, Isra Mi'raj, Tahun Baru Islam, dan hari besar lainnya.",
-    jadwal: "Mengikuti Kalender Hijriyah",
-    warna: "#d97706"
+    jadwal: "Mengikuti Kalender Hijriyah"
   }
 ];
 
@@ -106,289 +104,253 @@ const pengumumanData = [
 ];
 
 // ===== DATA GALERI =====
-// Untuk menambah foto nyata, isi field "foto" dengan path file:
-// Contoh: foto: "assets/images/masjid.jpg"
+// Letakkan foto di assets/images/ lalu isi field "foto"
+// Jika file tidak ada, otomatis tampil emoji placeholder
 const galeriData = [
-  { emoji: "🕌", label: "Masjid Al-Ikhlas", bg: "linear-gradient(135deg, #0f4a31, #1a6b47)", foto: "assets/images/masjid.jpg" },
-  { emoji: "🌙", label: "Sholat Tarawih", bg: "linear-gradient(135deg, #1e3a5f, #2563eb)", foto: "assets/images/kegiatan1.jpg" },
-  { emoji: "📖", label: "Pengajian Rutin", bg: "linear-gradient(135deg, #4a1942, #7c3aed)", foto: "assets/images/kegiatan2.jpg" },
-  { emoji: "🎓", label: "Santri TPA", bg: "linear-gradient(135deg, #7c2d12, #c9973a)", foto: "assets/images/kegiatan3.jpg" },
-  { emoji: "🤲", label: "Buka Bersama", bg: "linear-gradient(135deg, #064e3b, #10b981)", foto: "assets/images/kegiatan4.jpg" },
-  { emoji: "⭐", label: "Maulid Nabi", bg: "linear-gradient(135deg, #1a1a2e, #6a5acd)", foto: "assets/images/kegiatan5.jpg" }
+  { emoji: "🕌", label: "Masjid Al-Ikhlas",  bg: "linear-gradient(135deg,#0f4a31,#1a6b47)", foto: "assets/images/masjid.jpg" },
+  { emoji: "🌙", label: "Sholat Tarawih",    bg: "linear-gradient(135deg,#1e3a5f,#2563eb)", foto: "assets/images/kegiatan1.jpg" },
+  { emoji: "📖", label: "Pengajian Rutin",   bg: "linear-gradient(135deg,#4a1942,#7c3aed)", foto: "assets/images/kegiatan2.jpg" },
+  { emoji: "🎓", label: "Santri TPA",        bg: "linear-gradient(135deg,#7c2d12,#c9973a)", foto: "assets/images/kegiatan3.jpg" },
+  { emoji: "🤲", label: "Buka Bersama",      bg: "linear-gradient(135deg,#064e3b,#10b981)", foto: "assets/images/kegiatan4.jpg" },
+  { emoji: "⭐", label: "Maulid Nabi",       bg: "linear-gradient(135deg,#1a1a2e,#6a5acd)", foto: "assets/images/kegiatan5.jpg" }
 ];
 
-// ===== INIT FUNCTIONS =====
-
-function initNavbar() {
-  const nav = document.getElementById('mainNav');
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
-  hamburger?.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-
-  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-    });
-  });
-}
+// ============================================================
+// HELPERS
+// ============================================================
 
 function getActiveWaktu() {
   const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-  const toMinutes = (time) => {
-    const [h, m] = time.split(':').map(Number);
-    return h * 60 + m;
-  };
-
-  const waktuList = [
-    { key: 'subuh', menit: toMinutes(jadwalSholat.subuh) },
-    { key: 'dzuhur', menit: toMinutes(jadwalSholat.dzuhur) },
-    { key: 'ashar', menit: toMinutes(jadwalSholat.ashar) },
-    { key: 'maghrib', menit: toMinutes(jadwalSholat.maghrib) },
-    { key: 'isya', menit: toMinutes(jadwalSholat.isya) },
+  const cur = now.getHours() * 60 + now.getMinutes();
+  const toMin = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+  const list = [
+    { key:'subuh',   menit: toMin(jadwalSholat.subuh) },
+    { key:'dzuhur',  menit: toMin(jadwalSholat.dzuhur) },
+    { key:'ashar',   menit: toMin(jadwalSholat.ashar) },
+    { key:'maghrib', menit: toMin(jadwalSholat.maghrib) },
+    { key:'isya',    menit: toMin(jadwalSholat.isya) }
   ];
-
-  let activeKey = 'isya';
-  for (let i = waktuList.length - 1; i >= 0; i--) {
-    if (currentMinutes >= waktuList[i].menit) {
-      activeKey = waktuList[i].key;
-      break;
-    }
+  let active = 'isya';
+  for (let i = list.length - 1; i >= 0; i--) {
+    if (cur >= list[i].menit) { active = list[i].key; break; }
   }
-  return activeKey;
+  return active;
 }
 
+// Copy teks ke clipboard — 2 metode + fallback prompt
+function copyToClipboard(text) {
+  // Metode 1: Clipboard API (HTTPS)
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  // Metode 2: execCommand lama (HTTP juga jalan)
+  return new Promise((resolve, reject) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    el.setAttribute('readonly', '');
+    el.style.cssText = 'position:absolute;left:-9999px;top:-9999px;';
+    document.body.appendChild(el);
+    el.select();
+    el.setSelectionRange(0, 99999); // mobile
+    const ok = document.execCommand('copy');
+    document.body.removeChild(el);
+    ok ? resolve() : reject(new Error('execCommand gagal'));
+  });
+}
+
+// ============================================================
+// INITS
+// ============================================================
+
+function initNavbar() {
+  const nav  = document.getElementById('mainNav');
+  const ham  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  if (!nav) return;
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  ham && ham.addEventListener('click', () => menu.classList.toggle('open'));
+
+  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => menu && menu.classList.remove('open'));
+  });
+}
+
+// ── Jadwal Sholat ──────────────────────────────────────────
 function initJadwal() {
-  const container = document.getElementById('jadwalGrid');
-  if (!container) return;
+  const grid = document.getElementById('jadwalGrid');
+  if (!grid) return;
 
-  const activeKey = getActiveWaktu();
-
+  const active = getActiveWaktu();
   const items = [
-    { key: 'subuh', icon: '🌅', nama: 'Subuh' },
-    { key: 'dzuhur', icon: '☀️', nama: 'Dzuhur' },
-    { key: 'ashar', icon: '🌤️', nama: 'Ashar' },
-    { key: 'maghrib', icon: '🌆', nama: 'Maghrib' },
-    { key: 'isya', icon: '🌙', nama: 'Isya' },
+    { key:'subuh',   icon:'🌅', nama:'Subuh' },
+    { key:'dzuhur',  icon:'☀️', nama:'Dzuhur' },
+    { key:'ashar',   icon:'🌤️', nama:'Ashar' },
+    { key:'maghrib', icon:'🌆', nama:'Maghrib' },
+    { key:'isya',    icon:'🌙', nama:'Isya' }
   ];
 
-  container.innerHTML = items.map(item => `
-    <div class="jadwal-item ${item.key === activeKey ? 'aktif' : ''}">
-      <div class="jadwal-icon">${item.icon}</div>
-      <div class="jadwal-nama">${item.nama}</div>
-      <div class="jadwal-waktu">${jadwalSholat[item.key]}</div>
-    </div>
-  `).join('');
+  grid.innerHTML = items.map(it => `
+    <div class="jadwal-item${it.key === active ? ' aktif' : ''}">
+      <div class="jadwal-icon">${it.icon}</div>
+      <div class="jadwal-nama">${it.nama}</div>
+      <div class="jadwal-waktu">${jadwalSholat[it.key]}</div>
+    </div>`).join('');
 
-  // Update tanggal
   const dateEl = document.getElementById('jadwalDate');
   if (dateEl) {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateEl.textContent = new Date().toLocaleDateString('id-ID', options);
+    dateEl.textContent = new Date().toLocaleDateString('id-ID',
+      { weekday:'long', year:'numeric', month:'long', day:'numeric' });
   }
 }
 
 function initMiniJadwal() {
-  const container = document.getElementById('miniJadwal');
-  if (!container) return;
-
-  const items = [
-    { nama: 'Subuh', key: 'subuh' },
-    { nama: 'Dzuhur', key: 'dzuhur' },
-    { nama: 'Ashar', key: 'ashar' },
-    { nama: 'Maghrib', key: 'maghrib' },
-  ];
-
-  container.innerHTML = items.map(item => `
+  const el = document.getElementById('miniJadwal');
+  if (!el) return;
+  el.innerHTML = [
+    { nama:'Subuh',   key:'subuh' },
+    { nama:'Dzuhur',  key:'dzuhur' },
+    { nama:'Ashar',   key:'ashar' },
+    { nama:'Maghrib', key:'maghrib' }
+  ].map(it => `
     <div class="sholat-mini-item">
-      <div class="nama">${item.nama}</div>
-      <div class="waktu">${jadwalSholat[item.key]}</div>
-    </div>
-  `).join('');
+      <div class="nama">${it.nama}</div>
+      <div class="waktu">${jadwalSholat[it.key]}</div>
+    </div>`).join('');
 }
 
+// ── Kegiatan ───────────────────────────────────────────────
 function initKegiatan() {
-  const container = document.getElementById('kegiatanGrid');
-  if (!container) return;
-
-  container.innerHTML = kegiatanData.map((item, i) => `
-    <div class="kegiatan-card fade-in-up" style="animation-delay: ${i * 0.1}s">
-      <div class="kegiatan-icon">${item.icon}</div>
-      <h3>${item.nama}</h3>
-      <p>${item.deskripsi}</p>
-      <span class="kegiatan-jadwal">🕐 ${item.jadwal}</span>
-    </div>
-  `).join('');
+  const el = document.getElementById('kegiatanGrid');
+  if (!el) return;
+  el.innerHTML = kegiatanData.map(it => `
+    <div class="kegiatan-card">
+      <div class="kegiatan-icon">${it.icon}</div>
+      <h3>${it.nama}</h3>
+      <p>${it.deskripsi}</p>
+      <span class="kegiatan-jadwal">🕐 ${it.jadwal}</span>
+    </div>`).join('');
 }
 
+// ── Pengumuman ─────────────────────────────────────────────
 function initPengumuman() {
-  const container = document.getElementById('pengumumanGrid');
-  if (!container) return;
-
-  container.innerHTML = pengumumanData.map((item, i) => `
-    <div class="pengumuman-card fade-in-up" style="animation-delay: ${i * 0.1}s">
-      <span class="pengumuman-badge badge-${item.badge}">${item.label}</span>
-      <h3>${item.icon} ${item.judul}</h3>
-      <p>${item.isi}</p>
-      <div class="pengumuman-date">📅 ${item.tanggal}</div>
-    </div>
-  `).join('');
+  const el = document.getElementById('pengumumanGrid');
+  if (!el) return;
+  el.innerHTML = pengumumanData.map(it => `
+    <div class="pengumuman-card">
+      <span class="pengumuman-badge badge-${it.badge}">${it.label}</span>
+      <h3>${it.icon} ${it.judul}</h3>
+      <p>${it.isi}</p>
+      <div class="pengumuman-date">📅 ${it.tanggal}</div>
+    </div>`).join('');
 }
 
+// ── Galeri ─────────────────────────────────────────────────
 function initGaleri() {
-  const container = document.getElementById('galeriGrid');
-  if (!container) return;
+  const el = document.getElementById('galeriGrid');
+  if (!el) return;
 
-  container.innerHTML = galeriData.map((item, i) => {
-    const fontSize = i === 0 ? '60px' : '40px';
-    if (item.foto) {
-      // Ada path foto — tampilkan gambar, fallback ke emoji jika gagal load
-      return `
-        <div class="galeri-item" style="background: ${item.bg}; padding: 0; position: relative;">
-          <img
-            src="${item.foto}"
-            alt="${item.label}"
-            loading="lazy"
-            style="width:100%; height:100%; object-fit:cover; display:block; border-radius: inherit;"
-            onerror="this.style.display='none'; this.parentElement.querySelector('.galeri-placeholder').style.display='flex';"
-          />
-          <div class="galeri-placeholder" style="display:none; position:absolute; inset:0;">
-            <span style="font-size:${fontSize}">${item.emoji}</span>
-            <span>${item.label}</span>
-          </div>
-          <div class="galeri-overlay">
-            <span>📷 ${item.label}</span>
-          </div>
+  el.innerHTML = galeriData.map((it, i) => {
+    const fs = i === 0 ? '60px' : '40px';
+    // Selalu render img tag; onerror akan swap ke placeholder
+    return `
+      <div class="galeri-item" style="background:${it.bg};padding:0;overflow:hidden;">
+        <img
+          src="${it.foto || ''}"
+          alt="${it.label}"
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;display:${it.foto ? 'block' : 'none'};"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          onload="this.nextElementSibling.style.display='none';"
+        />
+        <div class="galeri-placeholder" style="display:${it.foto ? 'none' : 'flex'};position:absolute;inset:0;">
+          <span style="font-size:${fs}">${it.emoji}</span>
+          <span>${it.label}</span>
         </div>
-      `;
-    } else {
-      // Belum ada foto — tampilkan placeholder emoji
-      return `
-        <div class="galeri-item" style="background: ${item.bg}">
-          <div class="galeri-placeholder">
-            <span style="font-size:${fontSize}">${item.emoji}</span>
-            <span>${item.label}</span>
-          </div>
-          <div class="galeri-overlay">
-            <span>📷 ${item.label}</span>
-          </div>
+        <div class="galeri-overlay">
+          <span>📷 ${it.label}</span>
         </div>
-      `;
-    }
+      </div>`;
   }).join('');
 }
 
-function initScrollTop() {
-  const btn = document.getElementById('scrollTop');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-function copyToClipboard(text) {
-  // Cara 1: Clipboard API modern (butuh HTTPS)
-  if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(text);
-  }
-  // Cara 2: Fallback pakai execCommand (works di semua browser/HTTP)
-  return new Promise((resolve, reject) => {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.cssText = 'position:fixed; top:-9999px; left:-9999px; opacity:0;';
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-    try {
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      resolve();
-    } catch (err) {
-      document.body.removeChild(textarea);
-      reject(err);
-    }
-  });
-}
-
+// ── Copy Rekening ──────────────────────────────────────────
 function initCopyRekening() {
   document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const noRek = btn.dataset.rek;
-      const original = btn.textContent;
+    btn.addEventListener('click', function() {
+      // Baca nomor dari data-rek attribute
+      const noRek = this.getAttribute('data-rek');
+      if (!noRek) return;
+
+      const self = this;
+      const orig = self.innerHTML;
 
       copyToClipboard(noRek)
         .then(() => {
-          btn.textContent = '✓ Tersalin!';
-          btn.style.background = '#10b981';
-          btn.style.transform = 'scale(1.05)';
+          self.innerHTML = '✓ Tersalin!';
+          self.style.background = '#10b981';
         })
         .catch(() => {
-          // Jika semua cara gagal, tampilkan nomor di prompt
-          prompt('Salin nomor rekening ini:', noRek);
-        })
-        .finally(() => {
-          setTimeout(() => {
-            btn.textContent = original;
-            btn.style.background = '';
-            btn.style.transform = '';
-          }, 2000);
+          // Fallback terakhir: prompt dialog
+          window.prompt('Salin nomor rekening ini (Ctrl+C / Cmd+C):', noRek);
         });
+
+      // Reset tombol setelah 2.5 detik
+      setTimeout(() => {
+        self.innerHTML = orig;
+        self.style.background = '';
+      }, 2500);
     });
   });
 }
 
+// ── Scroll to Top ──────────────────────────────────────────
+function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+}
+
+// ── Active Nav ─────────────────────────────────────────────
 function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const links    = document.querySelectorAll('.nav-links a');
+  if (!sections.length || !links.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(link => link.classList.remove('active'));
-        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (a) a.classList.add('active');
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.35 });
 
-  sections.forEach(section => observer.observe(section));
+  sections.forEach(s => observer.observe(s));
 }
 
-// ===== CLOCK =====
+// ── Live Clock ─────────────────────────────────────────────
 function initClock() {
-  const clockEl = document.getElementById('liveClock');
-  if (!clockEl) return;
-
-  function update() {
-    const now = new Date();
-    clockEl.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  }
-  update();
-  setInterval(update, 1000);
+  const el = document.getElementById('liveClock');
+  if (!el) return;
+  const tick = () => {
+    el.textContent = new Date().toLocaleTimeString('id-ID',
+      { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+  };
+  tick();
+  setInterval(tick, 1000);
 }
 
-// ===== MAIN INIT =====
+// ============================================================
+// MAIN — jalankan setelah DOM siap
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initJadwal();
@@ -396,8 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initKegiatan();
   initPengumuman();
   initGaleri();
-  initScrollTop();
   initCopyRekening();
+  initScrollTop();
   initActiveNav();
   initClock();
 });
