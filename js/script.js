@@ -38,7 +38,7 @@ const galeriEmoji = ['🕌','🌙','📖','🎓','🤲','⭐'];
 
 async function loadGistKonten() {
   // Jika URL belum diisi, tampilkan pesan petunjuk
-  if (!GIST_RAW_URL || GIST_RAW_URL === 'GANTI_DENGAN_RAW_URL_GIST_ANDA') {
+  if (!GIST_RAW_URL || GIST_RAW_URL === 'https://gist.githubusercontent.com/rnld-i/konten.json') {
     tampilkanPetunjukGist();
     return;
   }
