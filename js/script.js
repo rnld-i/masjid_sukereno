@@ -8,7 +8,7 @@
 // 4. Tempel URL tersebut di variabel GIST_RAW_URL di bawah
 // ============================================================
 
-const GIST_RAW_URL = 'GANTI_DENGAN_RAW_URL_GIST_ANDA';
+const GIST_RAW_URL = 'https://gist.githubusercontent.com/rnld-i/98a3a2349a7898abf6eea076d8b96797/raw/8e16ed8374208faaafe2165b8ff1ab6aa6a95f6d/konten.json';
 // Contoh: 'https://gist.githubusercontent.com/namakamu/abc123.../raw/konten.json'
 
 // ── Jadwal Sholat (edit manual di sini) ────────────────────
