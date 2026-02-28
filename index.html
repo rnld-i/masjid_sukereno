@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Website resmi Masjid Al-Ikhlas Desa Sukoreno, Kecamatan Sentolo. Jadwal sholat, kegiatan, pengumuman, dan informasi masjid." />
+  <title>Masjid Al-Ikhlas Sukoreno | Desa Sukoreno, Sentolo</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="mainNav">
+  <div class="nav-container">
+    <a href="#beranda" class="nav-brand">
+      <div class="nav-logo">🕌</div>
+      <div class="nav-brand-text">
+        <h1>Masjid Al-Ikhlas</h1>
+        <span>Desa Sukoreno, Sentolo</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#beranda" class="active">Beranda</a></li>
+      <li><a href="#jadwal">Jadwal Sholat</a></li>
+      <li><a href="#kegiatan">Kegiatan</a></li>
+      <li><a href="#pengumuman">Pengumuman</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#donasi">Donasi</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#beranda">🏠 Beranda</a></li>
+    <li><a href="#jadwal">🕐 Jadwal Sholat</a></li>
+    <li><a href="#kegiatan">📋 Kegiatan</a></li>
+    <li><a href="#pengumuman">📢 Pengumuman</a></li>
+    <li><a href="#galeri">📸 Galeri</a></li>
+    <li><a href="#donasi">💚 Donasi</a></li>
+    <li><a href="#kontak">📍 Kontak</a></li>
+  </ul>
+</div>
+
+<!-- ===== HERO / BERANDA ===== -->
+<section id="beranda" class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌿 Masjid Al-Ikhlas — Sukoreno</div>
+      <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <h1 class="hero-title">Masjid Al-Ikhlas<br/>Desa Sukoreno</h1>
+      <div class="hero-subtitle">Kecamatan Sentolo, Kulon Progo</div>
+      <p class="hero-desc">
+        Pusat ibadah, pendidikan, dan kegiatan sosial masyarakat Desa Sukoreno. 
+        Bersama membangun iman, menjaga ukhuwah, dan meraih ridha Allah SWT.
+      </p>
+      <div class="hero-buttons">
+        <a href="#jadwal" class="btn-primary">📿 Jadwal Sholat</a>
+        <a href="#kegiatan" class="btn-outline">Lihat Kegiatan →</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-card">
+        <span class="hero-mosque-icon">🕌</span>
+        <div style="font-family: 'Amiri', serif; font-size: 20px; margin-bottom: 4px;">وَأَقِيمُوا الصَّلَاةَ</div>
+        <div style="font-size: 13px; opacity: 0.75; margin-bottom: 20px;">"Dan tegakkanlah sholat..." (QS. Al-Baqarah: 43)</div>
+        
+        <div class="hero-waktu-sholat">
+          <h3>Jadwal Sholat Hari Ini</h3>
+          <div class="sholat-mini-grid" id="miniJadwal"></div>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 22px; font-family: 'Amiri', serif; color: #e8b860; font-weight: 700;" id="liveClock"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JADWAL SHOLAT ===== -->
+<section id="jadwal" class="jadwal-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">🕐 Waktu Ibadah</div>
+      <h2 class="section-title">Jadwal Sholat Harian</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Waktu sholat untuk wilayah Sentolo, Kulon Progo, DIY</p>
+    </div>
+
+    <div class="jadwal-container">
+      <div class="jadwal-header">
+        <div>
+          <div class="jadwal-title">⏰ Waktu Sholat</div>
+          <div class="jadwal-date" id="jadwalDate"></div>
+        </div>
+        <div style="text-align: right; font-family: 'Amiri', serif; font-size: 18px; opacity: 0.7;">
+          الصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ
+        </div>
+      </div>
+      <div class="jadwal-grid" id="jadwalGrid"></div>
+      <div style="margin-top: 20px; font-size: 12px; opacity: 0.55; text-align: center;">
+        ⚡ Waktu yang ditampilkan adalah waktu standar. Selisih ±2 menit dimungkinkan terjadi.
+        Waktu sholat yang disorot adalah sholat yang sedang berlaku saat ini.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAMBUTAN ===== -->
+<section style="background: var(--cream); padding: 70px 0;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <div class="section-tag">💬 Sambutan</div>
+        <h2 class="section-title" style="text-align: left; margin-top: 8px;">Sambutan Ketua<br/>Takmir Masjid</h2>
+        <div class="divider" style="margin: 16px 0;"></div>
+        <p style="color: var(--text-light); line-height: 1.9; margin-bottom: 16px;">
+          <em style="font-family: 'Amiri', serif; font-size: 18px; color: var(--emerald);">Assalamu'alaikum Warahmatullahi Wabarakatuh,</em>
+        </p>
+        <p style="color: var(--text-mid); line-height: 1.9; margin-bottom: 16px;">
+          Segala puji bagi Allah SWT yang telah memberikan kita nikmat iman dan Islam. 
+          Atas nama seluruh pengurus Takmir Masjid Al-Ikhlas, kami mengucapkan selamat datang 
+          di website resmi masjid kita tercinta.
+        </p>
+        <p style="color: var(--text-mid); line-height: 1.9; margin-bottom: 24px;">
+          Masjid ini bukan sekadar tempat sholat, melainkan pusat peradaban dan pemberdayaan 
+          umat. Kami mengundang seluruh warga Desa Sukoreno untuk aktif berpartisipasi dalam 
+          setiap kegiatan masjid demi kemakmuran bersama.
+        </p>
+        <div style="background: var(--white); border-left: 4px solid var(--emerald); padding: 16px 20px; border-radius: 0 12px 12px 0;">
+          <div style="font-weight: 700; color: var(--emerald-dark);">H. Ahmad Fauzi</div>
+          <div style="font-size: 13px; color: var(--text-light);">Ketua Takmir Masjid Al-Ikhlas</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div style="background: var(--white); border-radius: 16px; padding: 28px; text-align: center; box-shadow: var(--shadow);">
+          <div style="font-size: 40px; margin-bottom: 8px;">🕌</div>
+          <div style="font-size: 28px; font-weight: 800; color: var(--emerald); font-family: 'Amiri', serif;">15+</div>
+          <div style="font-size: 13px; color: var(--text-light);">Tahun Berdiri</div>
+        </div>
+        <div style="background: var(--emerald); border-radius: 16px; padding: 28px; text-align: center; color: white;">
+          <div style="font-size: 40px; margin-bottom: 8px;">👨‍👩‍👧‍👦</div>
+          <div style="font-size: 28px; font-weight: 800; font-family: 'Amiri', serif;">500+</div>
+          <div style="font-size: 13px; opacity: 0.8;">Jamaah Aktif</div>
+        </div>
+        <div style="background: var(--gold); border-radius: 16px; padding: 28px; text-align: center; color: white;">
+          <div style="font-size: 40px; margin-bottom: 8px;">📖</div>
+          <div style="font-size: 28px; font-weight: 800; font-family: 'Amiri', serif;">6+</div>
+          <div style="font-size: 13px; opacity: 0.85;">Program Rutin</div>
+        </div>
+        <div style="background: var(--white); border-radius: 16px; padding: 28px; text-align: center; box-shadow: var(--shadow);">
+          <div style="font-size: 40px; margin-bottom: 8px;">🎓</div>
+          <div style="font-size: 28px; font-weight: 800; color: var(--emerald); font-family: 'Amiri', serif;">80+</div>
+          <div style="font-size: 13px; color: var(--text-light);">Santri TPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEGIATAN ===== -->
+<section id="kegiatan" class="kegiatan-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📋 Program</div>
+      <h2 class="section-title">Kegiatan Masjid</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Program rutin yang memakmurkan masjid dan memberdayakan jamaah</p>
+    </div>
+    <div class="kegiatan-grid" id="kegiatanGrid"></div>
+  </div>
+</section>
+
+<!-- ===== PENGUMUMAN ===== -->
+<section id="pengumuman" class="pengumuman-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📢 Informasi</div>
+      <h2 class="section-title">Pengumuman Terbaru</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Informasi dan pengumuman terkini seputar kegiatan masjid</p>
+    </div>
+    <div class="pengumuman-grid" id="pengumumanGrid"></div>
+  </div>
+</section>
+
+<!-- ===== GALERI ===== -->
+<section id="galeri" class="galeri-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📸 Dokumentasi</div>
+      <h2 class="section-title">Galeri Kegiatan</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Dokumentasi berbagai kegiatan dan momen berharga masjid</p>
+    </div>
+    <div class="galeri-grid" id="galeriGrid"></div>
+    <div style="text-align: center; margin-top: 32px; font-size: 13px; color: var(--text-light);">
+      💡 Untuk menambahkan foto nyata, ganti file gambar di folder <code style="background: rgba(26,107,71,0.1); padding: 2px 8px; border-radius: 4px; color: var(--emerald);">assets/images/</code>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONASI ===== -->
+<section id="donasi" class="donasi-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">💚 Sedekah</div>
+      <h2 class="section-title">Donasi & Infaq</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Berkontribusi untuk kemakmuran masjid dan kesejahteraan jamaah</p>
+    </div>
+
+    <div class="donasi-container">
+      <div class="donasi-info">
+        <h2>Tunaikan Infaq<br/>untuk Masjid Kita</h2>
+        <p>
+          Setiap rupiah yang Anda infaqkan akan digunakan untuk pemeliharaan masjid, 
+          operasional kegiatan, dan pemberdayaan jamaah. Semoga Allah SWT membalas 
+          kebaikan Anda dengan berlipat ganda.
+        </p>
+        <p style="font-style: italic; color: var(--emerald); font-family: 'Amiri', serif; font-size: 18px; margin-bottom: 28px;">
+          "مَثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ"
+        </p>
+
+        <div class="rekening-list">
+          <div class="rekening-item">
+            <div>
+              <div class="rekening-bank">🏦 Bank BRI</div>
+              <div class="rekening-no">1234-5678-9012-3456</div>
+              <div class="rekening-atas-nama">a.n. Masjid Al-Ikhlas Sukoreno</div>
+            </div>
+            <button class="copy-btn" data-rek="1234567890123456">📋 Salin</button>
+          </div>
+
+          <div class="rekening-item">
+            <div>
+              <div class="rekening-bank">🏦 Bank BNI</div>
+              <div class="rekening-no">0987654321</div>
+              <div class="rekening-atas-nama">a.n. Takmir Masjid Al-Ikhlas</div>
+            </div>
+            <button class="copy-btn" data-rek="0987654321">📋 Salin</button>
+          </div>
+
+          <div class="rekening-item">
+            <div>
+              <div class="rekening-bank">🏦 BSI (Bank Syariah Indonesia)</div>
+              <div class="rekening-no">7153-4892-1</div>
+              <div class="rekening-atas-nama">a.n. Masjid Al-Ikhlas</div>
+            </div>
+            <button class="copy-btn" data-rek="715348921">📋 Salin</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="qris-card">
+        <div class="qris-placeholder">📱</div>
+        <h3>Scan QRIS</h3>
+        <p>Scan QR code di atas menggunakan aplikasi dompet digital atau mobile banking Anda</p>
+        <p style="margin-top: 12px; font-size: 11px; opacity: 0.6;">Didukung oleh: GoPay, OVO, Dana, ShopeePay, dan semua bank</p>
+        <div style="margin-top: 16px; padding: 12px; background: rgba(26,107,71,0.08); border-radius: 12px; font-size: 13px; color: var(--emerald); font-weight: 600;">
+          💚 Jazakumullahu Khairan Katsiran
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KONTAK ===== -->
+<section id="kontak" class="kontak-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📍 Lokasi</div>
+      <h2 class="section-title">Kontak & Lokasi</h2>
+      <div class="divider"></div>
+      <p class="section-desc" style="margin-top: 12px;">Temukan kami dan hubungi pengurus untuk informasi lebih lanjut</p>
+    </div>
+
+    <div class="kontak-grid">
+      <div class="kontak-info">
+        <h2>Hubungi Kami</h2>
+        
+        <div class="kontak-item">
+          <div class="kontak-icon-wrap">📍</div>
+          <div>
+            <h4>Alamat Masjid</h4>
+            <p>Masjid Al-Ikhlas, Desa Sukoreno<br/>Kecamatan Sentolo, Kabupaten Kulon Progo<br/>Daerah Istimewa Yogyakarta 55664</p>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-icon-wrap">📞</div>
+          <div>
+            <h4>Telepon / WhatsApp</h4>
+            <a href="tel:+6281234567890">+62 812-3456-7890</a><br/>
+            <a href="https://wa.me/6281234567890" target="_blank" style="color: var(--emerald);">💬 Chat di WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-icon-wrap">📧</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:masjid.alikhlas.sukoreno@gmail.com">masjid.alikhlas.sukoreno@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-icon-wrap">🕐</div>
+          <div>
+            <h4>Jam Operasional Sekretariat</h4>
+            <p>Senin – Jumat: 08:00 – 12:00<br/>Sabtu: 08:00 – 10:00<br/>Atau setelah sholat berjamaah</p>
+          </div>
+        </div>
+
+        <div class="kontak-item">
+          <div class="kontak-icon-wrap">👤</div>
+          <div>
+            <h4>Pengurus Masjid</h4>
+            <p><strong>Ketua Takmir:</strong> H. Ahmad Fauzi<br/>
+            <strong>Sekretaris:</strong> Bapak Khoirul Anam<br/>
+            <strong>Bendahara:</strong> Bapak Sugeng Riyanto</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="maps-embed">
+        <!-- Ganti src dengan embed Google Maps masjid yang sesungguhnya -->
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63264.27085744853!2d110.12553655!3d-7.8013947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ad3b12f6e2e3b%3A0x123456789abcdef0!2sSentolo%2C+Kulon+Progo!5e0!3m2!1sid!2sid!4v1234567890"
+          width="100%"
+          height="100%"
+          style="border: none; min-height: 380px; border-radius: 16px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokasi Masjid Al-Ikhlas Sukoreno"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <div style="width: 42px; height: 42px; background: rgba(255,255,255,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">🕌</div>
+          <h2 style="margin: 0;">Masjid Al-Ikhlas</h2>
+        </div>
+        <p>Masjid Al-Ikhlas Desa Sukoreno adalah pusat ibadah, pendidikan Islam, dan kegiatan sosial masyarakat Desa Sukoreno, Kecamatan Sentolo, Kulon Progo.</p>
+        <div style="font-family: 'Amiri', serif; font-size: 20px; color: var(--gold-light); opacity: 0.8;">
+          إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-links-title">Navigasi</div>
+        <ul>
+          <li><a href="#beranda">🏠 Beranda</a></li>
+          <li><a href="#jadwal">🕐 Jadwal Sholat</a></li>
+          <li><a href="#kegiatan">📋 Kegiatan</a></li>
+          <li><a href="#pengumuman">📢 Pengumuman</a></li>
+          <li><a href="#galeri">📸 Galeri</a></li>
+          <li><a href="#donasi">💚 Donasi</a></li>
+          <li><a href="#kontak">📍 Kontak</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-links-title">Jadwal Sholat</div>
+        <ul>
+          <li><a href="#jadwal">🌅 Subuh: 04:22</a></li>
+          <li><a href="#jadwal">☀️ Dzuhur: 11:52</a></li>
+          <li><a href="#jadwal">🌤️ Ashar: 15:14</a></li>
+          <li><a href="#jadwal">🌆 Maghrib: 17:43</a></li>
+          <li><a href="#jadwal">🌙 Isya: 18:57</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Masjid Al-Ikhlas Sukoreno. Dibuat dengan ❤️ untuk jamaah</span>
+      <span>Desa Sukoreno, Kecamatan Sentolo, Kulon Progo, DIY</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button id="scrollTop" title="Kembali ke atas">↑</button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
